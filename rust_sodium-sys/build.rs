@@ -372,7 +372,7 @@ fn get_libsodium() {
 
     // Run `./configure`
     let prefix_arg = format!("--prefix={}", install_dir);
-    let mut configure_cmd = Command::new("./configure");
+    let mut configure_cmd = Command::new(fs::canonicalize(Path::new(&source_dir).join("configure")).unwrap());
     if !compiler.is_empty() {
         configure_cmd.env("CC", &compiler);
     }
